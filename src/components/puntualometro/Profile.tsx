@@ -1,5 +1,6 @@
 import puntualometroLogo from "@/assets/puntualometro-logo.jpeg";
-import { Award, Star, Download, ChevronRight, Bell, Shield, LogOut } from "lucide-react";
+import { Award, Download, ChevronRight, Bell, Shield, LogOut } from "lucide-react";
+import { useAuth } from "@/contexts/AuthContext";
 
 const badges = [
   { icon: "🔥", label: "Racha 10", earned: true },
@@ -19,6 +20,7 @@ const historial = [
 ];
 
 const Profile = () => {
+  const { signOut } = useAuth();
   return (
     <div>
       {/* Header */}
@@ -101,16 +103,20 @@ const Profile = () => {
         {/* Settings */}
         <div className="bg-card rounded-2xl shadow-card overflow-hidden mb-8">
           {[
-            { icon: Bell, label: "Notificaciones", color: "text-primary" },
-            { icon: Shield, label: "Privacidad", color: "text-primary" },
-            { icon: LogOut, label: "Cerrar Sesión", color: "text-late" },
-          ].map(({ icon: Icon, label, color }) => (
-            <button key={label} className="w-full flex items-center gap-3 px-4 py-4 border-b border-border last:border-0 hover:bg-muted transition-colors">
+            { icon: Bell, label: "Notificaciones", color: "text-primary", action: () => {} },
+            { icon: Shield, label: "Privacidad", color: "text-primary", action: () => {} },
+          ].map(({ icon: Icon, label, color, action }) => (
+            <button key={label} onClick={action} className="w-full flex items-center gap-3 px-4 py-4 border-b border-border hover:bg-muted transition-colors">
               <Icon size={20} className={color} />
-              <span className={`flex-1 text-left font-semibold text-sm ${color === "text-late" ? "text-late" : "text-foreground"}`}>{label}</span>
+              <span className="flex-1 text-left font-semibold text-sm text-foreground">{label}</span>
               <ChevronRight size={16} className="text-muted-foreground" />
             </button>
           ))}
+          <button onClick={signOut} className="w-full flex items-center gap-3 px-4 py-4 hover:bg-muted transition-colors">
+            <LogOut size={20} className="text-late" />
+            <span className="flex-1 text-left font-semibold text-sm text-late">Cerrar Sesión</span>
+            <ChevronRight size={16} className="text-muted-foreground" />
+          </button>
         </div>
 
         {/* Footer branding */}
