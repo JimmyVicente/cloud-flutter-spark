@@ -4,14 +4,6 @@ import { useAuth } from "@/contexts/AuthContext";
 import { useBiometric } from "@/hooks/useBiometric";
 import { toast } from "sonner";
 
-const badges = [
-  { icon: "🔥", label: "Racha 10", earned: true },
-  { icon: "⭐", label: "Puntual x5", earned: true },
-  { icon: "🏆", label: "Top 5", earned: true },
-  { icon: "🚀", label: "Mejora 20%", earned: false },
-  { icon: "💎", label: "Excelencia", earned: false },
-  { icon: "🌟", label: "Maestro", earned: false },
-];
 
 const historial = [
   { date: "Lun 17 Feb", event: "Reunión Semanal", status: "🟢", pts: "+10" },
@@ -73,23 +65,6 @@ const Profile = () => {
           ))}
         </div>
 
-        {/* Badges */}
-        <div className="bg-card rounded-2xl p-4 shadow-card mb-4">
-          <div className="flex items-center justify-between mb-3">
-            <h3 className="font-bold text-foreground">Insignias</h3>
-            <span className="text-xs text-muted-foreground">3/6 obtenidas</span>
-          </div>
-          <div className="grid grid-cols-6 gap-2">
-            {badges.map((b) => (
-              <div key={b.label} className="text-center">
-                <div className={`w-11 h-11 rounded-xl flex items-center justify-center text-xl mx-auto ${b.earned ? "gradient-gold shadow-gold" : "bg-muted opacity-40"}`}>
-                  {b.icon}
-                </div>
-                <p className="text-[9px] text-muted-foreground mt-1 leading-tight">{b.label}</p>
-              </div>
-            ))}
-          </div>
-        </div>
 
         {/* Certificate Download */}
         <button className="w-full bg-card rounded-2xl p-4 shadow-card mb-4 flex items-center gap-3 hover:bg-primary-light transition-colors">
